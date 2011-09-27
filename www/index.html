@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  	
+	<title>PhraseRace</title>
+	
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	
+	<link rel="stylesheet" href="css/reset.css" type="text/css">
+	<link rel="stylesheet" href="css/phraserace.css" type="text/css">
+
+	<!-- 
+		iPad/iPhone specific css below, add after your main css
+		<link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />		
+		<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />		
+	-->
+
+	<!-- If your application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
+
+	<script type="text/javascript" charset="utf-8" src="phonegap-1.0.0.js"></script>
+	<script type="text/javascript" src="jquery-1.6.2.min.js"></script>
+	<script type="text/javascript" src="nouns.js"></script>
+	<script type="text/javascript" src="phraserace.js"></script>
+	<script type="text/javascript" charset="utf-8">
+
+		//prevent dragging, uncomment this section
+
+		function preventBehavior(e) { 
+			e.preventDefault(); 
+		};
+		document.addEventListener("touchmove", preventBehavior, false);
+
+		
+		// If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
+		// see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
+		// for more details -jm */
+		// function handleOpenURL(url) {
+			// TODO: do something with the url passed in.
+		// }
+		
+		function onBodyLoad() {		
+			document.addEventListener("deviceready",onDeviceReady,false);
+		}
+		
+		// When this function is called, PhoneGap has been initialized and is ready to roll */
+		// If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
+		// see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
+		// for more details -jm */
+		
+		function onDeviceReady() {
+			// do your thing!
+			//navigator.notification.alert("PhoneGap is working")
+			main();
+		}
+		
+    </script>
+	
+</head>
+
+<body onload="onBodyLoad()">
+	
+	<div id="main">
+		
+		<div id="scoreboard">
+			<div id="teamA" class="team">
+				<h2>Dragons</h2>
+				<div id="winsA" class="points A score"></div>
+				<div class="counter">
+					:<span id="timerA" class="points"></span>
+				</div>
+			</div>
+			<div id="roundbox">
+				<h2>vs</h2>
+				Round <span id="round"></span>
+			</div>
+			<div id="teamB" class="team">
+				<h2>Eagles</h2>
+				<div id="winsB" class="points B score"></div>
+				<div class="counter">
+					:<span id="timerB" class="points"></span>
+				</div>
+			</div>
+		</div>
+		
+		<div id="phrasebox">
+			“<span id="phrase"></span>”
+			<a id="refresh" href="#">Refresh</a>
+		</div>
+		
+		<div style="height:5%"></div>
+		
+		<div id="button">
+			<a id="control">Start!</a>
+		</div>
+		
+		<div style="height:5%"></div>
+		
+		<div id="pause">||</div>
+	
+	</div>
+	
+	<div id="pause_overlay" style="display:none;">
+		<a href="#" id="resume">Resume</a>
+		<a href="#" id="reset">Reset</a>
+	</div>
+
+</body>
+</html>
