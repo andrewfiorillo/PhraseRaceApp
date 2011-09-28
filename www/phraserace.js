@@ -103,6 +103,7 @@ function tick(gs) {
 
 
 function pop(gs) {
+  gs.phrase = gs.phrases.pop();
 }
 
 function success(gs) {
@@ -111,7 +112,11 @@ function success(gs) {
   } else {
       gs.turn = 'A';
   }
-  gs.phrase = gs.phrases.pop();
+  gs.waitperiod = true;
+  document.setInterval(function () {
+    gs.waitperiod = false
+    }, 1500);
+  pop(gs);
 }
 
 
