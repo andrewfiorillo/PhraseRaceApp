@@ -19,6 +19,8 @@ function init() {
   out.hightick = new Media("beep-8.mp3");
   out.buzzer = new Media("Buzzer1-JD.wav");
 
+  $("#team"+gs.turn).addClass('active');
+
   shuffle(out.phrases)
   return out
 }
@@ -107,6 +109,7 @@ function pop(gs) {
 }
 
 function success(gs) {
+  $("#team"+gs.turn).removeCass('active');
   if (gs.turn == 'A') {
       gs.turn = 'B';
   } else {
@@ -114,6 +117,7 @@ function success(gs) {
   }
   gs.waitperiod = true;
   window.setInterval(function () {gs.waitperiod = false}, 1500);
+  $("#team"+gs.turn).addClass('active');
   pop(gs);
 }
 
