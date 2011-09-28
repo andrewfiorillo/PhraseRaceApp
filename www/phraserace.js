@@ -113,9 +113,7 @@ function success(gs) {
       gs.turn = 'A';
   }
   gs.waitperiod = true;
-  document.setInterval(function () {
-    gs.waitperiod = false
-    }, 1500);
+  window.setInterval(function () {gs.waitperiod = false}, 1500);
   pop(gs);
 }
 
@@ -140,7 +138,10 @@ function main() {
       if (!gs.started) {
         gs = init();
       }
-      if (gs.going && !gs.paused && !gs.waitperiod) {
+      console.log(gs.waitperiod);
+      if (gs.waitperiod) {
+        return
+      } else if (gs.going && !gs.paused) {
         success(gs);
       } else if (gs.paused) {
         return;
