@@ -18,6 +18,8 @@ function init() {
   out.lowtick = new Media("beep-7.mp3");
   out.hightick = new Media("beep-8.mp3");
   out.buzzer = new Media("Buzzer1-JD.wav");
+  out.refresh = new Media("err.wav");
+  out.gotit = new Media("pleasure.wav");
 
   $("#team"+gs.turn).addClass('active');
 
@@ -110,6 +112,7 @@ function pop(gs) {
 
 function success(gs) {
   $("#team"+gs.turn).removeCass('active');
+  gs.gotit.play()
   if (gs.turn == 'A') {
       gs.turn = 'B';
   } else {
@@ -161,6 +164,9 @@ function main() {
   });
 
   $("#refresh").click(function (){
+  	if (gs.going) {
+  		gs.refresh.play();
+  	}
     if (gs.going && gs["timer" + gs.turn] > 5)  {
         gs["timer" + gs.turn] -= 5;
         pop(gs);
