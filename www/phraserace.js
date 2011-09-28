@@ -63,21 +63,21 @@ function changeover(gs) {
 function declareWinner(gs) {
     gs.going = false; 
     if (gs["timerB"] <= 0) {
-      gs.phrase = "ROUND FOR TEAM A!";
+      gs.phrase = "ROUND FOR DRAGONS!";
       gs.turn = 'A';
       gs.winsA += 1;
     }
     if (gs["timerA"] <= 0) {
-      gs.phrase = "ROUND FOR TEAM B!";
+      gs.phrase = "ROUND FOR EAGLES!";
       gs.turn = 'B';
       gs.winsB += 1;
     }
     if (gs.winsB >= 3 && gs.winsB - gs.winsA > 1) {
-      gs.phrase = "VICTORY FOR TEAM B!";
+      gs.phrase = "VICTORY FOR DRAGONS!";
       gs.won = true;
     }
     if (gs.winsA >= 3 && gs.winsA - gs.winsB > 1) {
-      gs.phrase = "VICTORY FOR TEAM A!";
+      gs.phrase = "VICTORY FOR EAGLES!";
       gs.won = false;
     }
     var control = document.getElementById('control');
