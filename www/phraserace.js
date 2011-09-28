@@ -14,9 +14,9 @@ function init() {
   out.hitreset = false;
   out.paused = false;
 
-  out.lowtick = new Audio("beep-7.mp3");
-  out.hightick = new Audio("beep-8.mp3");
-  out.buzzer = new Audio("Buzzer1-JD.wav");
+  out.lowtick = new Media("beep-7.mp3");
+  out.hightick = new Media("beep-8.mp3");
+  out.buzzer = new Media("Buzzer1-JD.wav");
 
   shuffle(out.phrases)
   return out
@@ -88,36 +88,18 @@ function declareWinner(gs) {
     control.innerHTML = 'Next round';
 }
 
-
-function playAudio(url) {
-  // var my_media = new Media(url,
-  //   function() {
-  //     console.log("playAudio():Audio Success");
-  //   },
-  //   function(err) {
-  //     console.log("playAudio():Audio Error: "+err);
-  //   }
-  // );
-  var my_media = new Media(url);
-  my_media.play();
-}
-
-
 function tick(gs) {
   if (gs.going) {
     if (gs["timerA"] <= 0 || gs["timerB"] <= 0) {
-        //gs.buzzer.play();
-        playAudio('Buzzer1-JD.wav');
+        gs.buzzer.play();
         declareWinner(gs);
         return;
     }
 
     if (gs["timer" + gs.turn] > 10) {
-      //gs.lowtick.play()
-      playAudio('beep-7.mp3');
+      gs.lowtick.play()
     } else {
-      //gs.hightick.play()
-      playAudio('beep-8.mp3');
+      gs.hightick.play()
     }
     gs["timer" + gs.turn] = gs["timer" + gs.turn] - 1;
   }
@@ -130,7 +112,6 @@ function pop(gs) {
 
 
 function success(gs) {
-  //gs["timer" + gs.turn] += 2;
   changeover(gs);
   pop(gs);
 }
