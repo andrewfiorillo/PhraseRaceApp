@@ -13,6 +13,7 @@ function init() {
   out.won = false;
   out.hitreset = false;
   out.paused = false;
+  out.waitperiod = false;
 
   out.lowtick = new Media("beep-7.mp3");
   out.hightick = new Media("beep-8.mp3");
@@ -56,11 +57,6 @@ function draw(gs) {
 
 
 function changeover(gs) {
-  if (gs.turn == 'A') {
-      gs.turn = 'B';
-  } else {
-      gs.turn = 'A';
-  }
 }
 
 
@@ -107,13 +103,15 @@ function tick(gs) {
 
 
 function pop(gs) {
-  gs.phrase = gs.phrases.pop();
 }
 
-
 function success(gs) {
-  changeover(gs);
-  pop(gs);
+  if (gs.turn == 'A') {
+      gs.turn = 'B';
+  } else {
+      gs.turn = 'A';
+  }
+  gs.phrase = gs.phrases.pop();
 }
 
 
@@ -137,7 +135,7 @@ function main() {
       if (!gs.started) {
         gs = init();
       }
-      if (gs.going && !gs.paused) {
+      if (gs.going && !gs.paused && !gs.waitperiod) {
         success(gs);
       } else if (gs.paused) {
         return;
