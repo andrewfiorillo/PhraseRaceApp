@@ -67,13 +67,18 @@ function declareWinner(gs) {
     gs.going = false; 
     if (gs["timerB"] <= 0) {
       gs.phrase = "ROUND FOR DRAGONS!";
+      $("#team"+gs.turn).removeClass('active');
       gs.turn = 'A';
+      $("#team"+gs.turn).addClass('active');
+
       gs.winsA += 1;
       vibe();
     }
     if (gs["timerA"] <= 0) {
       gs.phrase = "ROUND FOR EAGLES!";
+      $("#team"+gs.turn).removeClass('active');
       gs.turn = 'B';
+      $("#team"+gs.turn).addClass('active');
       gs.winsB += 1;
       vibe();
     }
