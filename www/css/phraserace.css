@@ -62,6 +62,22 @@ div#phrasebox {
 	font-weight: bold;
     line-height: 120%;
 }
+div#phrasebox span.quoteopen {
+	color: orange;
+	position: absolute;
+	top: 60px;
+	left: 10px;
+	font-size: 130px;
+	opacity: 0.3;
+}
+div#phrasebox span.quoteclose {
+	color: orange;
+	position: absolute;
+	bottom: -15px;
+	right: 10px;
+	font-size: 130px;
+	opacity: 0.3;
+}
 div#phrasebox a#refresh {
 	background: url(../images/refresh.png) 0 0 no-repeat;
 	width: 17px;
