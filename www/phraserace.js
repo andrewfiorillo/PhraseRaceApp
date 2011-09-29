@@ -15,11 +15,11 @@ function init() {
   out.paused = false;
   out.waitperiod = false;
 
-  out.lowtick = new Media("beep-7.mp3");
-  out.hightick = new Media("beep-8.mp3");
-  out.buzzer = new Media("Buzzer1-JD.wav");
+  out.lowtick = new Media("lowtick.wav");
+  out.hightick = new Media("hightick.wav");
+  out.buzzer = new Media("buzzer.wav");
   out.refresh = new Media("err.wav");
-  out.gotit = new Media("pleasure.wav");
+  out.gotit = new Media("success.wav");
 
   shuffle(out.phrases)
   return out
@@ -95,9 +95,9 @@ function tick(gs) {
     }
 
     if (gs["timer" + gs.turn] > 10) {
-      gs.lowtick.play()
+      gs.lowtick.play();
     } else {
-      gs.hightick.play()
+      gs.hightick.play();
     }
     gs["timer" + gs.turn] = gs["timer" + gs.turn] - 1;
   }
@@ -109,7 +109,7 @@ function pop(gs) {
 }
 
 function success(gs) {
-  gs.gotit.play()
+  gs.gotit.play();
   if (gs.turn == 'A') {
       gs.turn = 'B';
   } else {
