@@ -21,7 +21,6 @@ function init() {
   out.buzzer = new Media("buzzer.wav");
   out.refresh = new Media("err.wav");
   out.gotit = new Media("success.wav");
-
   
   shuffle(out.phrases)
   return out
