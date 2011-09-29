@@ -60,6 +60,7 @@ div#phrasebox {
 	height: 15%;
 	font-size: 30px;
 	font-weight: bold;
+    line-height: 120%;
 }
 div#phrasebox a#refresh {
 	background: url(../images/refresh.png) 0 0 no-repeat;
@@ -123,4 +124,7 @@ div#pause_overlay a {
 div#pause_overlay a#resume:active {
 	background: #eee;
 	color: #444;
+}
+div#scoreboard div.active {
+    background: #e99;
 }

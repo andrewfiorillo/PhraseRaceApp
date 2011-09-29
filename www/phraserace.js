@@ -14,6 +14,7 @@ function init() {
   out.hitreset = false;
   out.paused = false;
   out.waitperiod = false;
+  out.waittimer = 0;
 
   out.lowtick = new Media("beep-7.mp3");
   out.hightick = new Media("beep-8.mp3");
@@ -21,8 +22,7 @@ function init() {
   out.refresh = new Media("err.wav");
   out.gotit = new Media("pleasure.wav");
 
-  $("#team"+gs.turn).addClass('active');
-
+  
   shuffle(out.phrases)
   return out
 }
@@ -59,10 +59,10 @@ function draw(gs) {
   if (gs.started) phrase.innerHTML = gs.phrase;
 }
 
-
-function changeover(gs) {
+function vibe(t) {
+//    t = t || 500;
+//    navigation.notifiation.vibrate(t);
 }
-
 
 function declareWinner(gs) {
     gs.going = false; 
@@ -70,19 +70,23 @@ function declareWinner(gs) {
       gs.phrase = "ROUND FOR DRAGONS!";
       gs.turn = 'A';
       gs.winsA += 1;
+      vibe();
     }
     if (gs["timerA"] <= 0) {
       gs.phrase = "ROUND FOR EAGLES!";
       gs.turn = 'B';
       gs.winsB += 1;
+      vibe();
     }
     if (gs.winsB >= 3 && gs.winsB - gs.winsA > 1) {
       gs.phrase = "VICTORY FOR DRAGONS!";
       gs.won = true;
+      vibe(1000);
     }
     if (gs.winsA >= 3 && gs.winsA - gs.winsB > 1) {
       gs.phrase = "VICTORY FOR EAGLES!";
       gs.won = false;
+      vibe(1000);
     }
     var control = document.getElementById('control');
     control.innerHTML = 'Next round';
@@ -111,22 +115,28 @@ function pop(gs) {
 }
 
 function success(gs) {
-  $("#team"+gs.turn).removeCass('active');
-  gs.gotit.play()
+  $("#team"+gs.turn).removeClass('active');
+  gs.gotit.play();
+  pop(gs);
   if (gs.turn == 'A') {
       gs.turn = 'B';
   } else {
       gs.turn = 'A';
   }
   gs.waitperiod = true;
-  window.setInterval(function () {gs.waitperiod = false}, 1500);
+  if (gs.waittimer == 0) {
+     gs.waittimer = window.setTimeout(function () {
+         gs.waitperiod = false;
+         gs.waittimer = 0;}, 1500);
+  }
   $("#team"+gs.turn).addClass('active');
-  pop(gs);
 }
 
 
 function main() {
   var gs = init();
+  $("#team"+gs.turn).addClass('active');
+
   pop(gs);
   draw(gs);
   
@@ -145,7 +155,6 @@ function main() {
       if (!gs.started) {
         gs = init();
       }
-      console.log(gs.waitperiod);
       if (gs.waitperiod) {
         return
       } else if (gs.going && !gs.paused) {
@@ -177,7 +186,10 @@ function main() {
 
   $("#reset").click(function () {
     if (!gs.going) {
+      $("#team"+gs.turn).removeClass('active');
       gs = init();
+      $("#team"+gs.turn).addClass('active');
+      pop(gs);
       var control = document.getElementById('control');
       $('#pause_overlay').hide();
       control.innerHTML = 'New Game'
